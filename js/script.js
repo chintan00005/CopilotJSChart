@@ -24,19 +24,19 @@ var incomeInputs = document.querySelectorAll('input[id$="-income"]');
 var expenseInputs = document.querySelectorAll('input[id$="-expense"]');
 
 // Function to update chart data
-function updateChartData(chart) {
+function updateChartData() {
     incomeData = Array.from(incomeInputs).map(input => input.value);
     expenseData = Array.from(expenseInputs).map(input => input.value);
 
-    chart.data.datasets[0].data = incomeData;
-    chart.data.datasets[1].data = expenseData;
+    myChart.data.datasets[0].data = incomeData;
+    myChart.data.datasets[1].data = expenseData;
 
-    chart.update();
+    myChart.update();
 }
 
 // Add event listeners to all income and expense inputs
-incomeInputs.forEach(input => input.addEventListener('input', () => updateChartData(myChart)));
-expenseInputs.forEach(input => input.addEventListener('input', () => updateChartData(myChart)));
+incomeInputs.forEach(input => input.addEventListener('input', updateChartData));
+expenseInputs.forEach(input => input.addEventListener('input', updateChartData));
 
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -64,5 +64,3 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
-module.exports = { updateChartData };
